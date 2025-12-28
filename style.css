@@ -1,0 +1,202 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  h1, h2, h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  p {
+    margin-bottom: 15px;
+  }
+  
+  /* Navigation Styles */
+  nav {
+    background: #f5f5f5;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    color: #0073b1;
+  }
+  
+  /* Section Styles */
+  section {
+    padding: 60px 40px;
+  }
+  
+  #home {
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  /* Resume Download Button */
+  .resume-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background-color: #0073b1;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 115, 177, 0.2);
+  }
+
+  .resume-icon {
+    font-size: 1.2rem;
+  }
+
+  .resume-button:hover {
+    background-color: #005885;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 115, 177, 0.3);
+  }
+
+  .resume-button:active {
+    transform: translateY(0);
+  }
+  
+  /* Projects Section */
+  .project {
+    margin-bottom: 50px;
+  }
+  
+  .project h3 {
+    margin-bottom: 5px;
+  }
+  
+  .project p {
+    max-width: 800px;
+  }
+  
+  /* Experience Section */
+  .experience {
+    margin-bottom: 50px;
+  }
+  
+  .experience h3 {
+    margin-bottom: 5px;
+  }
+  
+  .experience .org {
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .experience ul {
+    max-width: 900px;
+    padding-left: 20px;
+  }
+  
+  .experience li {
+    margin-bottom: 8px;
+  }
+  
+  /* Contact Section */
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 30px;
+    max-width: 600px;
+  }
+  
+  .contact-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 2px solid #0073b1;
+    border-radius: 6px;
+    color: #0073b1;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 115, 177, 0.1);
+    width: 100%;
+  }
+
+  .contact-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-right: 10px;
+    opacity: 0.8;
+  }
+
+  .contact-value {
+    font-size: 1rem;
+    font-weight: 500;
+    flex: 1;
+    text-align: right;
+  }
+  
+  .contact-button:hover {
+    background-color: #0073b1;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 115, 177, 0.3);
+  }
+  
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    section {
+      padding: 40px 20px;
+    }
+  
+    .project p,
+    .experience ul {
+      max-width: 100%;
+    }
+
+    .contact-buttons {
+      gap: 10px;
+    }
+
+    .contact-button {
+      padding: 8px 15px;
+    }
+
+    .contact-label {
+      font-size: 0.85rem;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+    }
+  }  
