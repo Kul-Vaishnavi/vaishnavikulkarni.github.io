@@ -1,819 +1,909 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vaishnavi Kulkarni | Supply Chain & Data Analytics</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: #0a0e14;
-      color: #e6e9f0;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* Animated gradient background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(77, 163, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(123, 183, 255, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(77, 163, 255, 0.05) 0%, transparent 50%);
-      animation: gradientShift 20s ease infinite;
-      z-index: -1;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(10%, 10%); }
-    }
-
-    a {
-      color: #4da3ff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: #7bb7ff;
-    }
-
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 20, 27, 0.9);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(77, 163, 255, 0.1);
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    nav.scrolled {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    nav ul {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 20px;
-      list-style: none;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    nav a {
-      color: #cfd6e4;
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #4da3ff, #7bb7ff);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #4da3ff;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 32px 100px;
-    }
-
-    section {
-      margin-bottom: 120px;
-      scroll-margin-top: 100px;
-      opacity: 0;
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    section:nth-child(1) { animation-delay: 0.1s; }
-    section:nth-child(2) { animation-delay: 0.2s; }
-    section:nth-child(3) { animation-delay: 0.3s; }
-    section:nth-child(4) { animation-delay: 0.4s; }
-    section:nth-child(5) { animation-delay: 0.5s; }
-    section:nth-child(6) { animation-delay: 0.6s; }
-
-    h1, h2, h3 {
-      color: #ffffff;
-      line-height: 1.3;
-      font-weight: 700;
-    }
-
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #ffffff 0%, #7bb7ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-      display: inline-block;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, #4da3ff, #7bb7ff);
-      border-radius: 2px;
-    }
-
-    /* Hero Section */
-    #home {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 80px;
-      position: relative;
-    }
-
-    .hero-content {
-      z-index: 1;
-    }
-
-    .hero-greeting {
-      color: #4da3ff;
-      font-size: 1.1rem;
-      font-weight: 500;
-      margin-bottom: 16px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    #home h1 {
-      font-size: 4.5rem;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #ffffff 0%, #4da3ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: 1.5rem;
-      color: #aeb7c6;
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
-      color: #8892a6;
-      max-width: 700px;
-      margin: 0 auto 40px;
-      line-height: 1.8;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary, .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #4da3ff, #357abd);
-      color: #ffffff;
-      border: none;
-      box-shadow: 0 4px 15px rgba(77, 163, 255, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(77, 163, 255, 0.5);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #4da3ff;
-      border: 2px solid #4da3ff;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(77, 163, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-
-    /* About Section */
-    #about {
-      margin-top: 120px;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-top: 40px;
-    }
-
-    .about-text p {
-      margin-bottom: 20px;
-      color: #cfd6e4;
-      font-size: 1.05rem;
-    }
-
-    .expertise-grid {
-      display: grid;
-      gap: 20px;
-    }
-
-    .expertise-item {
-      background: linear-gradient(135deg, rgba(18, 24, 38, 0.6), rgba(18, 24, 38, 0.3));
-      border: 1px solid rgba(77, 163, 255, 0.15);
-      border-radius: 12px;
-      padding: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .expertise-item:hover {
-      border-color: #4da3ff;
-      transform: translateX(8px);
-    }
-
-    .expertise-item h4 {
-      color: #4da3ff;
-      margin-bottom: 8px;
-      font-size: 1.1rem;
-    }
-
-    .expertise-item p {
-      color: #aeb7c6;
-      font-size: 0.95rem;
-      margin: 0;
-    }
-
-    /* Experience Section */
-    .experience {
-      background: linear-gradient(135deg, rgba(18, 24, 38, 0.6), rgba(18, 24, 38, 0.3));
-      border: 1px solid rgba(77, 163, 255, 0.15);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 40px;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-
-    .experience::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(180deg, #4da3ff, #7bb7ff);
-      transform: scaleY(0);
-      transition: transform 0.4s ease;
-    }
-
-    .experience:hover::before {
-      transform: scaleY(1);
-    }
-
-    .experience:hover {
-      border-color: #4da3ff;
-      transform: translateX(8px);
-      box-shadow: 0 10px 40px rgba(77, 163, 255, 0.15);
-    }
-
-    .experience h3 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      color: #ffffff;
-    }
-
-    .org {
-      color: #7bb7ff;
-      margin-bottom: 20px;
-      font-size: 1.05rem;
-    }
-
-    .experience ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .experience ul li {
-      margin-bottom: 14px;
-      padding-left: 28px;
-      position: relative;
-      color: #cfd6e4;
-      line-height: 1.7;
-    }
-
-    .experience ul li::before {
-      content: '▹';
-      position: absolute;
-      left: 0;
-      color: #4da3ff;
-      font-size: 1.2rem;
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 40px;
-      margin-top: 50px;
-    }
-
-    .project-card {
-      background: linear-gradient(135deg, rgba(18, 24, 38, 0.8), rgba(18, 24, 38, 0.4));
-      border: 1px solid rgba(77, 163, 255, 0.2);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.4s ease;
-      position: relative;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #4da3ff, #7bb7ff);
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-    }
-
-    .project-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      border-color: #4da3ff;
-      box-shadow: 0 15px 50px rgba(77, 163, 255, 0.25);
-    }
-
-    .project-card-content {
-      padding: 35px;
-    }
-
-    .project-card h3 {
-      color: #ffffff;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-    }
-
-    .project-tools {
-      color: #4da3ff;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .project-card p {
-      color: #cfd6e4;
-      font-size: 1rem;
-      margin-bottom: 14px;
-      line-height: 1.7;
-    }
-
-    .project-impact {
-      background: rgba(77, 163, 255, 0.1);
-      border-left: 3px solid #4da3ff;
-      padding: 16px;
-      margin-top: 20px;
-      border-radius: 8px;
-    }
-
-    .project-impact strong {
-      color: #4da3ff;
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 50px;
-    }
-
-    .skill-category {
-      background: linear-gradient(135deg, rgba(18, 24, 38, 0.6), rgba(18, 24, 38, 0.3));
-      border: 1px solid rgba(77, 163, 255, 0.15);
-      border-radius: 16px;
-      padding: 30px;
-      transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-      border-color: #4da3ff;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(77, 163, 255, 0.15);
-    }
-
-    .skill-category h3 {
-      color: #4da3ff;
-      font-size: 1.2rem;
-      margin-bottom: 16px;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .skill-tag {
-      background: rgba(77, 163, 255, 0.1);
-      color: #7bb7ff;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      border: 1px solid rgba(77, 163, 255, 0.2);
-      transition: all 0.2s ease;
-    }
-
-    .skill-tag:hover {
-      background: rgba(77, 163, 255, 0.2);
-      border-color: #4da3ff;
-      transform: scale(1.05);
-    }
-
-    /* Contact */
-    #contact {
-      text-align: center;
-      padding: 80px 0;
-    }
-
-    .contact-intro {
-      max-width: 600px;
-      margin: 0 auto 50px;
-      font-size: 1.1rem;
-      color: #aeb7c6;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .contact-card {
-      background: linear-gradient(135deg, rgba(18, 24, 38, 0.6), rgba(18, 24, 38, 0.3));
-      border: 1px solid rgba(77, 163, 255, 0.15);
-      border-radius: 16px;
-      padding: 30px;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .contact-card:hover {
-      border-color: #4da3ff;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(77, 163, 255, 0.2);
-    }
-
-    .contact-icon {
-      font-size: 2rem;
-    }
-
-    .contact-label {
-      color: #7bb7ff;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .contact-value {
-      color: #ffffff;
-      font-size: 1.05rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      #home h1 { font-size: 3rem; }
-      .hero-subtitle { font-size: 1.2rem; }
-      h2 { font-size: 2rem; }
-      
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      nav ul {
-        gap: 20px;
-        padding: 16px;
-      }
-      
-      nav a {
-        font-size: 0.85rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaishnavi Kulkarni | Portfolio</title>
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body { 
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
+    background: #050811; 
+    color: #e6e9f0; 
+    overflow-x: hidden; 
+    scroll-behavior: smooth; 
+    line-height: 1.6;
+    position: relative;
+  }
+
+  /* Animated gradient background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(77, 163, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(123, 83, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(255, 83, 123, 0.05) 0%, transparent 50%);
+    animation: gradientShift 15s ease infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.8; transform: scale(1.1) rotate(5deg); }
+  }
+
+  /* Floating Nav Buttons */
+  .section-nav {
+    position: fixed;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1000;
+  }
+  
+  .section-nav button {
+    background: rgba(28, 34, 51, 0.6);
+    backdrop-filter: blur(10px);
+    color: #4da3ff;
+    border: 2px solid rgba(77, 163, 255, 0.3);
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .section-nav button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .section-nav button:hover::before {
+    left: 100%;
+  }
+  
+  .section-nav button:hover {
+    background: rgba(77, 163, 255, 0.2);
+    border-color: #4da3ff;
+    transform: translateX(-5px);
+    box-shadow: 0 0 20px rgba(77, 163, 255, 0.4);
+  }
+
+  /* Sections */
+  section {
+    min-height: 100vh;
+    padding: 80px 40px;
+    padding-right: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  #home {
+    padding-right: 40px;
+  }
+
+  /* Headings with gradient */
+  h1, h2, h3, h4 { 
+    color: #ffffff; 
+    margin-bottom: 16px;
+  }
+  
+  h2 { 
+    font-size: 3rem; 
+    margin-bottom: 48px;
+    background: linear-gradient(135deg, #4da3ff, #7b53ff, #ff537b);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+
+  /* Section-specific colors - Galaxy/Night Sky theme */
+  #about h2 {
+    background: linear-gradient(135deg, #5b8dee, #8b9eff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+  }
+
+  #experience h2 {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+  }
+
+  #projects h2 {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+  }
+
+  #skills h2 {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+  }
+
+  #contact h2 {
+    background: linear-gradient(135deg, #818cf8, #a5b4fc);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 8s ease infinite;
+  }
+
+  @keyframes gradientText {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Glass morphism cards */
+  .card {
+    background: rgba(18, 24, 38, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(77, 163, 255, 0.2);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 28px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.1), transparent);
+    transition: left 0.6s;
+  }
+
+  .card:hover::before {
+    left: 100%;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(77, 163, 255, 0.2);
+    border-color: rgba(77, 163, 255, 0.5);
+  }
+
+  /* Hero Section */
+  #home { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    position: relative;
+  }
+  
+  #home h1 { 
+    font-size: 5rem; 
+    margin-bottom: 24px; 
+    letter-spacing: -2px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff, #4da3ff, #7b53ff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientText 6s ease infinite, fadeInUp 1s ease;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .hero-subtitle { 
+    font-size: 1.8rem; 
+    color: #aeb7c6; 
+    margin-bottom: 24px;
+    font-weight: 600;
+    animation: fadeInUp 1s ease 0.2s backwards;
+  }
+  
+  .hero-description { 
+    max-width: 700px; 
+    margin: 0 auto 48px; 
+    color: #8892a6; 
+    font-size: 1.1rem; 
+    line-height: 1.8;
+    animation: fadeInUp 1s ease 0.4s backwards;
+  }
+  
+  .cta-buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 24px;
+    animation: fadeInUp 1s ease 0.6s backwards;
+  }
+  
+  .btn-primary, .btn-secondary {
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.05rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary { 
+    background: linear-gradient(135deg, #4da3ff, #7b53ff);
+    color: #fff; 
+    border: none;
+    box-shadow: 0 8px 24px rgba(77, 163, 255, 0.3);
+  }
+  
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  .btn-primary:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .btn-primary:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 12px 32px rgba(77, 163, 255, 0.5);
+  }
+  
+  .btn-secondary { 
+    border: 2px solid #4da3ff; 
+    color: #4da3ff; 
+    background: rgba(77, 163, 255, 0.05);
+    backdrop-filter: blur(10px);
+  }
+  
+  .btn-secondary:hover { 
+    transform: translateY(-3px); 
+    background: #4da3ff; 
+    color: #050811;
+    box-shadow: 0 8px 24px rgba(77, 163, 255, 0.4);
+  }
+
+  /* About */
+  .about-content { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 40px; 
+    margin-top: 24px;
+  }
+  
+  .about-text { 
+    flex: 1; 
+    min-width: 300px; 
+    font-size: 1.05rem; 
+    color: #cfd6e4;
+    line-height: 1.9;
+  }
+
+  .about-text p {
+    margin-bottom: 20px;
+    animation: fadeInLeft 0.8s ease;
+  }
+
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .expertise-item { 
+    background: rgba(18, 24, 38, 0.5);
+    backdrop-filter: blur(10px);
+    border-left: 4px solid #4da3ff; 
+    padding: 24px 28px; 
+    border-radius: 16px; 
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .expertise-item:nth-child(1) { border-left-color: #5b8dee; }
+  .expertise-item:nth-child(2) { border-left-color: #7c9eff; }
+  .expertise-item:nth-child(3) { border-left-color: #8b9eff; }
+  .expertise-item:nth-child(4) { border-left-color: #a5b4fc; }
+
+  .expertise-item:hover {
+    transform: translateX(8px);
+    border-left-width: 6px;
+    background: rgba(18, 24, 38, 0.7);
+  }
+
+  .expertise-item:nth-child(1):hover {
+    box-shadow: 0 8px 24px rgba(91, 141, 238, 0.3);
+  }
+
+  .expertise-item:nth-child(2):hover {
+    box-shadow: 0 8px 24px rgba(124, 158, 255, 0.3);
+  }
+
+  .expertise-item:nth-child(3):hover {
+    box-shadow: 0 8px 24px rgba(139, 158, 255, 0.3);
+  }
+
+  .expertise-item:nth-child(4):hover {
+    box-shadow: 0 8px 24px rgba(165, 180, 252, 0.3);
+  }
+
+  .expertise-item h4 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  .expertise-item:nth-child(1) h4 { color: #5b8dee; }
+  .expertise-item:nth-child(2) h4 { color: #7c9eff; }
+  .expertise-item:nth-child(3) h4 { color: #8b9eff; }
+  .expertise-item:nth-child(4) h4 { color: #a5b4fc; }
+
+  /* Experience/Projects */
+  .experience, .projects-grid { 
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 24px;
+  }
+  
+  .projects-grid { 
+    gap: 32px;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  #experience .card:nth-child(1) h3 { color: #8b5cf6; }
+  #experience .card:nth-child(2) h3 { color: #7c3aed; }
+  #experience .card:nth-child(3) h3 { color: #6366f1; }
+  #experience .card:nth-child(4) h3 { color: #818cf8; }
+
+  #projects .card:nth-child(1) h3 { color: #a78bfa; }
+  #projects .card:nth-child(2) h3 { color: #9333ea; }
+
+  .card ul {
+    margin-left: 20px;
+    margin-top: 16px;
+  }
+
+  .card ul li {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    position: relative;
+    padding-left: 8px;
+  }
+
+  .card ul li::before {
+    content: '▹';
+    position: absolute;
+    left: -12px;
+    color: #4da3ff;
+    font-weight: bold;
+  }
+
+  /* Skills */
+  .skills-grid { 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px; 
+    margin-top: 32px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .skill-category { 
+    background: rgba(18, 24, 38, 0.5);
+    backdrop-filter: blur(20px);
+    padding: 28px; 
+    border-radius: 20px;
+    border: 1px solid rgba(77, 163, 255, 0.2);
+    transition: all 0.4s ease;
+  }
+
+  .skill-tag { 
+    padding: 10px 18px; 
+    border-radius: 24px; 
+    font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    font-weight: 500;
+  }
+
+  .skill-tag:hover {
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(77, 163, 255, 0.3);
+    border-color: transparent;
+  }
+
+  .skill-category:nth-child(1) { border-color: rgba(79, 70, 229, 0.4); }
+  .skill-category:nth-child(2) { border-color: rgba(99, 102, 241, 0.4); }
+  .skill-category:nth-child(3) { border-color: rgba(129, 140, 248, 0.4); }
+  .skill-category:nth-child(4) { border-color: rgba(165, 180, 252, 0.4); }
+
+  .skill-category:hover {
+    transform: translateY(-8px);
+  }
+
+  .skill-category:nth-child(1):hover {
+    border-color: rgba(79, 70, 229, 0.7);
+    box-shadow: 0 12px 32px rgba(79, 70, 229, 0.3);
+  }
+
+  .skill-category:nth-child(2):hover {
+    border-color: rgba(99, 102, 241, 0.7);
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.3);
+  }
+
+  .skill-category:nth-child(3):hover {
+    border-color: rgba(129, 140, 248, 0.7);
+    box-shadow: 0 12px 32px rgba(129, 140, 248, 0.3);
+  }
+
+  .skill-category:nth-child(4):hover {
+    border-color: rgba(165, 180, 252, 0.7);
+    box-shadow: 0 12px 32px rgba(165, 180, 252, 0.3);
+  }
+
+  .skill-category h3 {
+    color: #fff;
+    margin-bottom: 16px;
+    font-size: 1.3rem;
+  }
+  
+  .skill-tags { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin-top: 16px;
+  }
+  
+  .skill-category:nth-child(1) .skill-tag {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(99, 102, 241, 0.15));
+    border: 1px solid rgba(79, 70, 229, 0.4);
+  }
+
+  .skill-category:nth-child(1) .skill-tag:hover {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+  }
+
+  .skill-category:nth-child(2) .skill-tag {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(129, 140, 248, 0.15));
+    border: 1px solid rgba(99, 102, 241, 0.4);
+  }
+
+  .skill-category:nth-child(2) .skill-tag:hover {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+  }
+
+  .skill-category:nth-child(3) .skill-tag {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.2), rgba(139, 92, 246, 0.15));
+    border: 1px solid rgba(129, 140, 248, 0.4);
+  }
+
+  .skill-category:nth-child(3) .skill-tag:hover {
+    background: linear-gradient(135deg, #818cf8, #8b5cf6);
+  }
+
+  .skill-category:nth-child(4) .skill-tag {
+    background: linear-gradient(135deg, rgba(165, 180, 252, 0.2), rgba(124, 58, 237, 0.15));
+    border: 1px solid rgba(165, 180, 252, 0.4);
+  }
+
+  .skill-category:nth-child(4) .skill-tag:hover {
+    background: linear-gradient(135deg, #a5b4fc, #7c3aed);
+  }
+
+  /* Projects impact */
+  .impact {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(139, 92, 246, 0.15));
+    border-left: 4px solid #8b5cf6;
+    padding: 16px 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+  }
+
+  /* Contact */
+  .contact-grid { 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px; 
+    margin-top: 32px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .contact-btn {
+    background: rgba(18, 24, 38, 0.5);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(77, 163, 255, 0.3);
+    border-radius: 20px;
+    padding: 28px 32px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    font-weight: 600;
+    color: #e6e9f0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-btn:nth-child(1) { border-color: rgba(129, 140, 248, 0.4); }
+  .contact-btn:nth-child(2) { border-color: rgba(139, 92, 246, 0.4); }
+  .contact-btn:nth-child(3) { border-color: rgba(99, 102, 241, 0.4); }
+  .contact-btn:nth-child(4) { border-color: rgba(124, 58, 237, 0.4); }
+
+  .contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(77, 163, 255, 0.3), transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .contact-btn:hover::before {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .contact-btn:hover { 
+    transform: translateY(-8px);
+  }
+
+  .contact-btn:nth-child(1):hover {
+    background: rgba(129, 140, 248, 0.15);
+    border-color: #818cf8;
+    box-shadow: 0 12px 32px rgba(129, 140, 248, 0.3);
+  }
+
+  .contact-btn:nth-child(2):hover {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: #8b5cf6;
+    box-shadow: 0 12px 32px rgba(139, 92, 246, 0.3);
+  }
+
+  .contact-btn:nth-child(3):hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: #6366f1;
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.3);
+  }
+
+  .contact-btn:nth-child(4):hover {
+    background: rgba(124, 58, 237, 0.15);
+    border-color: #7c3aed;
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.3);
+  }
+  
+  .contact-sub { 
+    font-size: 0.85rem; 
+    color: #aeb7c6; 
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .contact-btn:nth-child(1) .contact-sub { color: #818cf8; }
+  .contact-btn:nth-child(2) .contact-sub { color: #8b5cf6; }
+  .contact-btn:nth-child(3) .contact-sub { color: #6366f1; }
+  .contact-btn:nth-child(4) .contact-sub { color: #7c3aed; }
+
+  /* Floating particles effect */
+  .particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: rgba(77, 163, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 8s infinite;
+    z-index: 0;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+  }
+
+  @media(max-width: 768px){
+    #home h1 { font-size: 3rem; }
+    h2 { font-size: 2.2rem; }
+    .about-content { flex-direction: column; }
+    .section-nav { right: 15px; }
+    .section-nav button { padding: 10px 14px; font-size: 0.85rem; }
+    .cta-buttons { flex-direction: column; }
+    section { padding-right: 40px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 
 <body>
 
-  <nav id="navbar">
+<!-- Floating particles -->
+<div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+<div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+<div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+<div class="particle" style="left: 40%; animation-delay: 1s;"></div>
+<div class="particle" style="left: 50%; animation-delay: 3s;"></div>
+<div class="particle" style="left: 60%; animation-delay: 5s;"></div>
+<div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
+<div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
+<div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+
+<!-- Floating Navigation -->
+<div class="section-nav">
+  <button onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'});">Home</button>
+  <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});">About</button>
+  <button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'});">Experience</button>
+  <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});">Projects</button>
+  <button onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'});">Skills</button>
+  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Contact</button>
+</div>
+
+<!-- Sections -->
+<section id="home">
+  <div>
+    <h1>Vaishnavi Kulkarni</h1>
+    <p class="hero-subtitle">Supply Chain & Data Analytics Professional</p>
+    <p class="hero-description">
+      2+ years of experience improving operational efficiency through analytics, process optimization, and digital enablement. 
+      Skilled in turning complex data into actionable insights to support strategic supply chain and operational decisions.
+    </p>
+    <div class="cta-buttons">
+      <a href="#contact" class="btn-primary">Get In Touch</a>
+      <a href="Resume.pdf" download class="btn-secondary">📄 Download Resume</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <p>
+        I am a Supply Chain and Data Analytics professional with experience supporting end-to-end supply chain operations, including demand planning, inventory health, procurement, logistics, and customer service. 
+      </p>
+      <p>
+        I have hands-on experience building dashboards, creating KPI reports, automating reporting workflows, and applying predictive models to support strategic decision-making.
+      </p>
+      <p>
+        Currently pursuing a Master's in Industrial Engineering at the University at Buffalo, I am seeking opportunities at the intersection of operations, analytics, and continuous improvement.
+      </p>
+    </div>
+    <div>
+      <div class="expertise-item"><h4>🔗 Supply Chain Operations</h4><p>Demand planning, inventory analysis, order execution, logistics monitoring, and procurement tracking.</p></div>
+      <div class="expertise-item"><h4>📊 Data & Reporting</h4><p>Dashboards and KPI reports using Power BI, SQL, Python, and Excel to enhance visibility across operations.</p></div>
+      <div class="expertise-item"><h4>⚙️ Process Improvement</h4><p>Workflow standardization, SOPs, reconciliation checks, root-cause analysis, and efficiency enhancements.</p></div>
+      <div class="expertise-item"><h4>🤝 Cross-Functional Collaboration</h4><p>Working closely with Planning, Procurement, Logistics, Finance, and Customer Service teams to drive seamless execution.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2>Professional Experience</h2>
+
+  <div class="card">
+    <h3>Supply Chain & Operations Analyst | Global Impex USA</h3>
+    <p>St Cloud, MN | May 2025 – Present</p>
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li>Manage end-to-end order execution for high-volume consumer products, ensuring alignment across demand planning, inventory readiness, and delivery timelines.</li>
+      <li>Track inventory health, aging stock, and replenishment needs across multiple warehouses, reducing risk of stockouts and excess inventory.</li>
+      <li>Coordinate with carriers and 3PL partners to monitor shipment status, exceptions, and ETA updates, cutting customer response delays by 30%.</li>
+      <li>Build reconciliation checks across orders, shipments, and invoices to improve accuracy during multi-stage fulfillment.</li>
+      <li>Support raw material procurement by reviewing lead times, supplier capacity, and open PO status.</li>
+      <li>Standardize reporting by integrating data from internal systems and vendor portals to improve access to KPIs.</li>
+      <li>Conduct weekly forecast accuracy and consumption trend analysis to support short-term planning decisions.</li>
     </ul>
-  </nav>
+  </div>
 
-  <main>
+  <div class="card">
+    <h3>Sr. Supply Chain Analyst | Siemens Pvt Ltd</h3>
+    <p>Mumbai, India | Jul 2023 – Jun 2024</p>
+    <ul>
+      <li>Designed dashboards for procurement, inventory turns, material utilization, and supplier reliability, reducing tracking time by 25%.</li>
+      <li>Automated procurement workflows and reporting pipelines using Python and Power Query, cutting operational costs by 12%.</li>
+      <li>Supported S&OP and demand–supply alignment through analysis of material requirements, supplier commitments, and production schedules.</li>
+      <li>Improved inventory accuracy through root-cause analysis of discrepancies, aging stock, and replenishment delays.</li>
+      <li>Partnered with procurement and engineering to evaluate vendors and streamline sourcing processes.</li>
+    </ul>
+  </div>
 
-    <section id="home">
-      <div class="hero-content">
-        <div class="hero-greeting">Supply Chain & Data Analytics Professional</div>
-        <h1>Vaishnavi Kulkarni</h1>
-        <p class="hero-subtitle">Transforming Operations Through Data-Driven Solutions</p>
-        <p class="hero-description">
-          Bridging the gap between supply chain operations and advanced analytics to drive measurable business impact. 
-          Specialized in automation, forecasting, and strategic optimization across global operations.
-        </p>
-        <div class="cta-buttons">
-          <a href="#contact" class="btn-primary">Get In Touch</a>
-          <a href="Resume.pdf" download class="btn-secondary">📄 Download Resume</a>
-        </div>
+  <div class="card">
+    <h3>Project Manager | Neptune Engineering Pvt Ltd</h3>
+    <p>Pune, India | Aug 2022 – Nov 2022</p>
+    <ul>
+      <li>Designed precision system layouts in AutoCAD with detailed bill of materials (BOM) management, improving design accuracy and reducing costly change orders during manufacturing phases.</li>
+      <li>Standardized engineering documentation processes across project teams, implementing structured templates and review workflows that cut approval cycle time by 20%.</li>
+      <li>Established structured feedback loops between engineering, procurement, and manufacturing teams, improving project approval turnaround and overall execution efficiency.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Project Engineer & Procurement Lead | BAJA SAE India – Team Gyrfalcons</h3>
+    <p>Pune, India | Jan 2021 – May 2021</p>
+    <ul>
+      <li>Designed high-performance ATV steering system in CATIA V5, optimizing geometry for enhanced maneuverability on challenging terrain for national-level collegiate competition.</li>
+      <li>Managed procurement activities with ₹10K budget, executing full procure-to-pay cycle including vendor identification, negotiation, purchase order management, and delivery coordination.</li>
+      <li>Secured ₹20K in corporate sponsorships from automotive industry partners through targeted proposals, expanding project resources and enabling advanced component selection.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Featured Projects</h2>
+  <div class="projects-grid">
+    <div class="card">
+      <h3>Energy Insecurity Prediction</h3>
+      <p>R | GIS | Machine Learning | Spatial Analysis</p>
+      <p>
+        Developed a comprehensive predictive analytics framework to identify and map energy insecurity hotspots across U.S. regions by integrating demographic, economic, climate, and energy consumption datasets from multiple federal sources.
+      </p>
+      <p>
+        Applied advanced clustering algorithms and regression models to uncover spatial and temporal patterns in energy poverty, with particular focus on high-burden households disproportionately affected by energy costs.
+      </p>
+      <p>
+        Created interactive geospatial dashboards that synthesize socioeconomic indicators with energy consumption data, providing policymakers with actionable intelligence to identify priority regions and design targeted intervention strategies.
+      </p>
+      <p class="impact"><strong>Impact:</strong> Enabled data-driven identification of vulnerable populations and geographic areas requiring immediate energy assistance, improving resource allocation for state and federal energy programs.</p>
+    </div>
+
+    <div class="card">
+      <h3>CitiBike Demand Forecasting</h3>
+      <p>Python | Pandas | XGBoost | Seaborn | Time Series Analysis</p>
+      <p>
+        Built machine learning models to forecast hourly demand across 800+ CitiBike stations, supporting efficient bike rebalancing operations and improving overall service reliability for New York City's bike-share system.
+      </p>
+      <p>
+        Engineered 50+ time-based and usage-pattern features from historical trip data, applying XGBoost gradient boosting to capture complex demand patterns influenced by weather, time of day, day of week, and seasonal trends.
+      </p>
+      <p>
+        Developed interactive dashboards visualizing demand trends by hour, day, and month, enabling operations teams to identify peak usage periods and optimize fleet allocation strategies in real-time.
+      </p>
+      <p class="impact"><strong>Impact:</strong> Delivered actionable insights that improved fleet management efficiency, reduced bike shortages at high-demand stations, and enhanced user experience through better availability.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Databases & Visualization</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">BigQuery</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Seaborn</span>
       </div>
-      
+    </div>
 
-    <section id="about">
-      <h2>About Me</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>
-            I'm a Supply Chain and Data Analytics professional with a passion for solving complex operational challenges through innovative, data-driven approaches. My career has been defined by a commitment to bridging the gap between engineering precision and business strategy.
-          </p>
-          <p>
-            With experience spanning international operations management, advanced analytics, and process automation, I thrive at the intersection of supply chain optimization and predictive modeling. Whether it's reducing operational costs by 12% through Python automation or forecasting demand for 800+ CitiBike stations, I focus on delivering tangible, measurable results.
-          </p>
-          <p>
-            My approach combines technical expertise in tools like Power BI, Python, and machine learning with a deep understanding of procurement, logistics, and cross-functional collaboration. I believe the most impactful solutions come from understanding both the data and the people behind it.
-          </p>
-        </div>
-        
-        <div class="expertise-grid">
-          <div class="expertise-item">
-            <h4>🔗 Supply Chain Excellence</h4>
-            <p>End-to-end operations management, from procurement to delivery, with focus on process optimization and cost reduction.</p>
-          </div>
-          <div class="expertise-item">
-            <h4>📊 Advanced Analytics</h4>
-            <p>Transforming raw data into actionable insights using Power BI, SQL, and machine learning frameworks.</p>
-          </div>
-          <div class="expertise-item">
-            <h4>🤖 Process Automation</h4>
-            <p>Streamlining workflows through Python scripting, Power Query, and intelligent automation solutions.</p>
-          </div>
-          <div class="expertise-item">
-            <h4>🎯 Strategic Planning</h4>
-            <p>Aligning operational initiatives with business objectives through data-driven forecasting and resource optimization.</p>
-          </div>
-        </div>
+    <div class="skill-category">
+      <h3>Programming & Analytics</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Predictive Modeling</span>
+        <span class="skill-tag">Regression</span>
+        <span class="skill-tag">Clustering</span>
       </div>
-    </section>
+    </div>
 
-    <section id="experience">
-      <h2>Professional Experience</h2>
-    
-      <div class="experience">
-        <h3>Supply Chain & Operations Analyst</h3>
-        <p class="org">
-          <strong>Global Impex USA</strong> | St Cloud, MN | May 2025 – Present
-        </p>
-        <ul>
-          <li>
-            Orchestrate end-to-end international textile order execution across multiple vendors and logistics partners, managing inventory monitoring, shipment tracking, customs compliance, and invoicing workflows
-          </li>
-          <li>
-            Achieved 30% reduction in customer inquiry response time by implementing structured logistics coordination protocols and establishing clear communication channels between operations, vendors, and customer service teams
-          </li>
-          <li>
-            Engineered data reconciliation processes that improved billing accuracy by identifying discrepancies across multi-shipment deliveries, reducing invoice errors and payment delays
-          </li>
-          <li>
-            Transformed reporting workflows by integrating disparate vendor databases and developing Excel-based forecasting models that enhanced inventory planning reliability and reduced stockout incidents
-          </li>
-        </ul>
+    <div class="skill-category">
+      <h3>Supply Chain & Operations</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP</span>
+        <span class="skill-tag">Inventory Management</span>
+        <span class="skill-tag">Logistics</span>
+        <span class="skill-tag">MRP Concepts</span>
+        <span class="skill-tag">Forecasting</span>
       </div>
-    
-      <div class="experience">
-        <h3>Sr. Supply Chain Analyst</h3>
-        <p class="org">
-          <strong>Siemens Pvt Ltd</strong> | Mumbai, India | Jul 2023 – Jun 2024
-        </p>
-        <ul>
-          <li>
-            Architected interactive Power BI dashboards for procurement and inventory management, delivering real-time visibility into supply chain metrics and reducing manual tracking time by 25%
-          </li>
-          <li>
-            Automated vendor reporting and procurement workflows using Python and Power Query, eliminating repetitive manual tasks and cutting operational costs by 12% while improving data accuracy
-          </li>
-          <li>
-            Led cross-functional coordination for new product launches, aligning engineering specifications, procurement timelines, and logistics planning to ensure on-time market delivery
-          </li>
-          <li>
-            Collaborated with R&D teams to implement sustainable packaging initiatives, conducting supplier assessments and material analysis to support company ESG commitments while maintaining cost efficiency
-          </li>
-        </ul>
+    </div>
+
+    <div class="skill-category">
+      <h3>Tools & Platforms</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">CATIA V5</span>
+        <span class="skill-tag">AutoCAD</span>
+        <span class="skill-tag">SolidWorks</span>
       </div>
-    
-      <div class="experience">
-        <h3>Project Manager</h3>
-        <p class="org">
-          <strong>Neptune Engineering Pvt Ltd</strong> | Pune, India | Aug 2022 – Nov 2022
-        </p>
-        <ul>
-          <li>
-            Designed precision system layouts in AutoCAD with detailed bill of materials (BOM) management, improving design accuracy and reducing costly change orders during manufacturing phases
-          </li>
-          <li>
-            Standardized engineering documentation processes across project teams, implementing structured templates and review workflows that cut approval cycle time by 20%
-          </li>
-          <li>
-            Established structured feedback loops between engineering, procurement, and manufacturing teams, improving project approval turnaround and overall execution efficiency
-          </li>
-        </ul>
-      </div>
-    
-      <div class="experience">
-        <h3>Project Engineer & Procurement Lead</h3>
-        <p class="org">
-          <strong>BAJA SAEIndia – Team Gyrfalcons</strong> | Pune, India | Jan 2021 – May 2021
-        </p>
-        <ul>
-          <li>
-            Designed high-performance ATV steering system in CATIA V5, optimizing geometry for enhanced maneuverability on challenging terrain for national-level collegiate competition
-          </li>
-          <li>
-            Managed procurement activities with ₹10K budget, executing full procure-to-pay cycle including vendor identification, negotiation, purchase order management, and delivery coordination
-          </li>
-          <li>
-            Secured ₹20K in corporate sponsorships from automotive industry partners through targeted proposals, expanding project resources and enabling advanced component selection
-          </li>
-        </ul>
-      </div>
-    
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section id="projects">
-      <h2>Featured Projects</h2>
+<section id="contact">
+  <h2>Get in Touch</h2>
+  <div class="contact-grid">
+    <div class="contact-btn" onclick="window.location.href='mailto:vaishnavikulkarni116@gmail.com';">
+      <div class="contact-sub">Email</div>
+      vaishnavikulkarni116@gmail.com
+    </div>
+    <div class="contact-btn">
+      <div class="contact-sub">Phone</div>
+      +1 (716) 936-6154
+    </div>
+    <div class="contact-btn" onclick="window.open('https://www.linkedin.com/in/kulkarnivaishnavi116','_blank');">
+      <div class="contact-sub">LinkedIn</div>
+      kulkarnivaishnavi116
+    </div>
+    <div class="contact-btn" onclick="window.open('https://github.com/Kul-Vaishnavi','_blank');">
+      <div class="contact-sub">GitHub</div>
+      Kul-Vaishnavi
+    </div>
+  </div>
+</section>
 
-      <div class="projects-grid">
-
-        <div class="project-card">
-          <div class="project-card-content">
-            <h3>Energy Insecurity Prediction</h3>
-            <p class="project-tools">R | GIS | Machine Learning | Spatial Analysis</p>
-            <p>
-              Developed a comprehensive predictive analytics framework to identify and map energy insecurity hotspots across U.S. regions by integrating demographic, economic, climate, and energy consumption datasets from multiple federal sources.
-            </p>
-            <p>
-              Applied advanced clustering algorithms and regression models to uncover spatial and temporal patterns in energy poverty, with particular focus on high-burden households disproportionately affected by energy costs.
-            </p>
-            <p>
-              Created interactive geospatial dashboards that synthesize socioeconomic indicators with energy consumption data, providing policymakers with actionable intelligence to identify priority regions and design targeted intervention strategies.
-            </p>
-            <div class="project-impact">
-              <p><strong>Impact:</strong> Enabled data-driven identification of vulnerable populations and geographic areas requiring immediate energy assistance, improving resource allocation for state and federal energy programs.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-card-content">
-            <h3>CitiBike Demand Forecasting</h3>
-            <p class="project-tools">Python | Pandas | XGBoost | Seaborn | Time Series Analysis</p>
-            <p>
-              Built machine learning models to forecast hourly demand across 800+ CitiBike stations, supporting efficient bike rebalancing operations and improving overall service reliability for New York City's bike-share system.
-            </p>
-            <p>
-              Engineered 50+ time-based and usage-pattern features from historical trip data, applying XGBoost gradient boosting to capture complex demand patterns influenced by weather, time of day, day of week, and seasonal trends.
-            </p>
-            <p>
-              Developed interactive dashboards visualizing demand trends by hour, day, and month, enabling operations teams to identify peak usage periods and optimize fleet allocation strategies in real-time.
-            </p>
-            <div class="project-impact">
-              <p><strong>Impact:</strong> Delivered actionable insights that improved fleet management efficiency, reduced bike shortages at high-demand stations, and enhanced user experience through better availability.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2>Technical Skills</h2>
-
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Data Analytics & Visualization</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">BigQuery</span>
-            <span class="skill-tag">Matplotlib</span>
-            <span class="skill-tag">Seaborn</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Programming & ML</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">R</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">XGBoost</span>
-            <span class="skill-tag">Regression</span>
-            <span class="skill-tag">Clustering</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Geospatial Analysis</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">GIS</span>
-            <span class="skill-tag">Spatial Analysis</span>
-            <span class="skill-tag">Data Fusion</span>
-            <span class="skill-tag">Climate Modeling</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Cloud Platforms</h3>
-          <div class
+</body>
+</html>
