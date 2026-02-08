@@ -382,7 +382,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 24px; 
     margin-top: 32px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -522,6 +522,13 @@
     margin-top: 4px;
   }
 
+  .cert-skills {
+    color: #aeb7c6;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
   /* Contact - unified styling */
   .contact-grid { 
     display: grid;
@@ -635,6 +642,10 @@
     .contact-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
   }
+
+  @media(min-width: 769px) and (max-width: 1200px){
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 </style>
 </head>
 
@@ -696,7 +707,7 @@
       <div class="expertise-item"><h4>🔗 Supply Chain Operations</h4><p>End-to-end operations management including demand forecasting, inventory optimization, procurement coordination, logistics execution, S&OP facilitation, and order fulfillment across distribution networks.</p></div>
       <div class="expertise-item"><h4>📊 Data Analytics & BI</h4><p>Building interactive dashboards, automated reporting pipelines, and predictive models using Power BI, SQL, Python, Snowflake, and advanced Excel. Expertise in KPI design, data modeling, and translating complex analytics into business insights.</p></div>
       <div class="expertise-item"><h4>⚙️ Process Automation & Optimization</h4><p>Streamlining workflows through automation, standardizing operational procedures, conducting root-cause analysis, and implementing data-driven improvements that reduce costs and enhance performance.</p></div>
-      <div class="expertise-item"><h4>🤝 Cross-Functional Leadership</h4><p>ollaborating with Planning, Procurement, Logistics, Finance, IT, and Customer Service teams to align objectives, improve data accuracy, and deliver integrated solutions across the supply chain.</p></div>
+      <div class="expertise-item"><h4>🤝 Cross-Functional Leadership</h4><p>Collaborating with Planning, Procurement, Logistics, Finance, IT, and Customer Service teams to align objectives, improve data accuracy, and deliver integrated solutions across the supply chain.</p></div>
     </div>
   </div>
 </section>
@@ -893,12 +904,14 @@
       <h3>📜 Professional Certifications</h3>
       <div class="cert-list">
         <div class="cert-item">
-          <a href="https://achieve.snowflake.com/a255a17f-a0ae-4fd3-a38d-3aa82ce89520#acc.1V4EMXTo" target="_blank">Hands-On Essentials: Data Warehousing Workshop</a>
-          <p class="cert-platform">SnowFlake • Issued February 2026</p>
+          <strong>Hands-On Essentials: Data Warehousing Workshop</strong>
+          <p class="cert-platform">Snowflake • Issued February 2026</p>
+          <p class="cert-skills">Skills: Snowflake Databases • Snowflake Warehouses • Snowflake SQL Worksheets • Snowflake External Stages • SQL</p>
         </div>
         <div class="cert-item">
-          <a href="https://www.linkedin.com/learning/certificates/bcc9c18112b853ab79f1208f721ed786516d0946ee17275585c30e7ae35e184c?trk=share_certificate" target="_blank">SQL Essential Training</a>
+          <strong>SQL Essential Training</strong>
           <p class="cert-platform">LinkedIn Learning • Issued January 2026</p>
+          <p class="cert-skills">Skills: SQL</p>
         </div>
         <div class="cert-item">
           <a href="https://www.linkedin.com/learning/certificates/15e7c519e53a2e81bbb846d38c3b5bbdeea44580889cff9295ddb30b13886a23" target="_blank">Material Requirements Planning (MRP) Strategies in SAP</a>
