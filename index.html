@@ -1,952 +1,999 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vaishnavi Kulkarni | Portfolio</title>
-
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body { 
-    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; 
-    background: #050811; 
-    color: #e6e9f0; 
-    overflow-x: hidden; 
-    scroll-behavior: smooth; 
-    line-height: 1.6;
-    position: relative;
-  }
-
-  /* Animated gradient background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 20% 50%, rgba(77, 163, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(123, 83, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(255, 83, 123, 0.05) 0%, transparent 50%);
-    animation: gradientShift 15s ease infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes gradientShift {
-    0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
-    50% { opacity: 0.8; transform: scale(1.1) rotate(5deg); }
-  }
-
-  /* Floating Nav Buttons */
-  .section-nav {
-    position: fixed;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 1000;
-  }
-  
-  .section-nav button {
-    background: rgba(28, 34, 51, 0.6);
-    backdrop-filter: blur(10px);
-    color: #4da3ff;
-    border: 2px solid rgba(77, 163, 255, 0.3);
-    padding: 12px 18px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 600;
-    font-size: 0.9rem;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .section-nav button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.3), transparent);
-    transition: left 0.5s;
-  }
-  
-  .section-nav button:hover::before {
-    left: 100%;
-  }
-  
-  .section-nav button:hover {
-    background: rgba(77, 163, 255, 0.2);
-    border-color: #4da3ff;
-    transform: translateX(-5px);
-    box-shadow: 0 0 20px rgba(77, 163, 255, 0.4);
-  }
-
-  /* Sections */
-  section {
-    min-height: 100vh;
-    padding: 80px 40px;
-    padding-right: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-  }
-  
-  #home {
-    padding-right: 40px;
-  }
-
-  /* Headings with gradient */
-  h1, h2, h3, h4 { 
-    color: #ffffff; 
-    margin-bottom: 16px;
-  }
-  
-  h2 { 
-    font-size: 3rem; 
-    margin-bottom: 48px;
-    background: linear-gradient(135deg, #4da3ff, #7b53ff, #ff537b);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientText 8s ease infinite;
-    font-weight: 800;
-    letter-spacing: -1px;
-  }
-
-  /* Unified color theme across all sections */
-  #about h2, #experience h2, #projects h2, #skills h2, #education h2, #contact h2 {
-    background: linear-gradient(135deg, #4da3ff, #7b53ff, #ff537b);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientText 8s ease infinite;
-  }
-
-  @keyframes gradientText {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  /* Glass morphism cards */
-  .card {
-    background: rgba(18, 24, 38, 0.4);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(77, 163, 255, 0.2);
-    border-radius: 24px;
-    padding: 32px;
-    margin-bottom: 28px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(77, 163, 255, 0.1), transparent);
-    transition: left 0.6s;
-  }
-
-  .card:hover::before {
-    left: 100%;
-  }
-  
-  .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 16px 48px rgba(77, 163, 255, 0.2);
-    border-color: rgba(77, 163, 255, 0.5);
-  }
-
-  /* Hero Section */
-  #home { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center;
-    position: relative;
-  }
-  
-  #home h1 { 
-    font-size: 5rem; 
-    margin-bottom: 24px; 
-    letter-spacing: -2px;
-    font-weight: 900;
-    background: linear-gradient(135deg, #ffffff, #4da3ff, #7b53ff);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientText 6s ease infinite, fadeInUp 1s ease;
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .hero-subtitle { 
-    font-size: 1.8rem; 
-    color: #aeb7c6; 
-    margin-bottom: 24px;
-    font-weight: 600;
-    animation: fadeInUp 1s ease 0.2s backwards;
-  }
-  
-  .hero-description { 
-    max-width: 700px; 
-    margin: 0 auto 48px; 
-    color: #8892a6; 
-    font-size: 1.1rem; 
-    line-height: 1.8;
-    animation: fadeInUp 1s ease 0.4s backwards;
-  }
-  
-  .cta-buttons { 
-    display: flex; 
-    justify-content: center; 
-    gap: 24px;
-    animation: fadeInUp 1s ease 0.6s backwards;
-  }
-  
-  .btn-primary, .btn-secondary {
-    padding: 16px 40px;
-    border-radius: 50px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.05rem;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-primary { 
-    background: linear-gradient(135deg, #4da3ff, #7b53ff);
-    color: #fff; 
-    border: none;
-    box-shadow: 0 8px 24px rgba(77, 163, 255, 0.3);
-  }
-  
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-  }
-  
-  .btn-primary:hover::after {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .btn-primary:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 12px 32px rgba(77, 163, 255, 0.5);
-  }
-  
-  .btn-secondary { 
-    border: 2px solid #4da3ff; 
-    color: #4da3ff; 
-    background: rgba(77, 163, 255, 0.05);
-    backdrop-filter: blur(10px);
-  }
-  
-  .btn-secondary:hover { 
-    transform: translateY(-3px); 
-    background: #4da3ff; 
-    color: #050811;
-    box-shadow: 0 8px 24px rgba(77, 163, 255, 0.4);
-  }
-
-  /* About */
-  .about-content { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 40px; 
-    margin-top: 24px;
-  }
-  
-  .about-text { 
-    flex: 1; 
-    min-width: 300px; 
-    font-size: 1.05rem; 
-    color: #cfd6e4;
-    line-height: 1.9;
-  }
-
-  .about-text p {
-    margin-bottom: 20px;
-    animation: fadeInLeft 0.8s ease;
-  }
-
-  @keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  
-  .expertise-item { 
-    background: rgba(18, 24, 38, 0.5);
-    backdrop-filter: blur(10px);
-    border-left: 4px solid #4da3ff; 
-    padding: 24px 28px; 
-    border-radius: 16px; 
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Unified expertise items */
-  .expertise-item:nth-child(1) { border-left-color: #4da3ff; }
-  .expertise-item:nth-child(2) { border-left-color: #6ba3ff; }
-  .expertise-item:nth-child(3) { border-left-color: #8ba3ff; }
-  .expertise-item:nth-child(4) { border-left-color: #aba3ff; }
-
-  .expertise-item:hover {
-    transform: translateX(8px);
-    border-left-width: 6px;
-    background: rgba(18, 24, 38, 0.7);
-    box-shadow: 0 8px 24px rgba(77, 163, 255, 0.3);
-  }
-
-  .expertise-item h4 {
-    font-size: 1.15rem;
-    margin-bottom: 8px;
-    color: #4da3ff;
-  }
-
-  /* Experience/Projects */
-  .experience, .projects-grid { 
-    display: flex; 
-    flex-direction: column; 
-    margin-top: 24px;
-  }
-  
-  .projects-grid { 
-    gap: 32px;
-  }
-
-  /* Unified card heading colors */
-  .card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 12px;
-    color: #7b53ff;
-  }
-
-  .card ul {
-    margin-left: 20px;
-    margin-top: 16px;
-  }
-
-  .card ul li {
-    margin-bottom: 12px;
-    line-height: 1.7;
-    position: relative;
-    padding-left: 8px;
-  }
-
-  .card ul li::before {
-    content: '▹';
-    position: absolute;
-    left: -12px;
-    color: #4da3ff;
-    font-weight: bold;
-  }
-
-  /* Skills */
-  .skills-grid { 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px; 
-    margin-top: 32px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Unified skill categories */
-  .skill-category { 
-    background: rgba(18, 24, 38, 0.5);
-    backdrop-filter: blur(20px);
-    padding: 28px; 
-    border-radius: 20px;
-    border: 1px solid rgba(77, 163, 255, 0.3);
-    transition: all 0.4s ease;
-  }
-
-  .skill-category:hover {
-    transform: translateY(-8px);
-    border-color: rgba(77, 163, 255, 0.6);
-    box-shadow: 0 12px 32px rgba(77, 163, 255, 0.3);
-  }
-
-  .skill-category h3 {
-    color: #fff;
-    margin-bottom: 16px;
-    font-size: 1.3rem;
-  }
-  
-  .skill-tags { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 10px; 
-    margin-top: 16px;
-  }
-  
-  .skill-tag {
-    background: linear-gradient(135deg, rgba(77, 163, 255, 0.2), rgba(123, 83, 255, 0.15));
-    border: 1px solid rgba(77, 163, 255, 0.4);
-  }
-
-  .skill-tag { 
-    padding: 10px 18px; 
-    border-radius: 24px; 
-    font-size: 0.9rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: default;
-    font-weight: 500;
-  }
-
-  .skill-tag:hover {
-    color: white;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(77, 163, 255, 0.3);
-    border-color: transparent;
-  }
-
-  /* Projects impact - unified styling */
-  .impact {
-    background: linear-gradient(135deg, rgba(77, 163, 255, 0.2), rgba(123, 83, 255, 0.15));
-    border-left: 4px solid #7b53ff;
-    padding: 16px 20px;
-    margin-top: 20px;
-    border-radius: 12px;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-  }
-
-  /* Education & Certifications - unified styling */
-  .education-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 32px;
-  }
-
-  .education-card {
-    background: rgba(18, 24, 38, 0.5);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(77, 163, 255, 0.3);
-    border-radius: 20px;
-    padding: 32px;
-    transition: all 0.4s ease;
-  }
-
-  .education-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(77, 163, 255, 0.6);
-    box-shadow: 0 12px 32px rgba(77, 163, 255, 0.3);
-  }
-
-  .education-card h3 {
-    color: #4da3ff;
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-  }
-
-  .education-meta {
-    color: #aeb7c6;
-    font-size: 1rem;
-    margin-bottom: 16px;
-  }
-
-  .cert-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 20px;
-  }
-
-  .cert-item {
-    background: rgba(77, 163, 255, 0.1);
-    border-left: 3px solid #4da3ff;
-    padding: 16px 20px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-  }
-
-  .cert-item:hover {
-    transform: translateX(8px);
-    background: rgba(77, 163, 255, 0.15);
-    border-left-width: 5px;
-    box-shadow: 0 4px 16px rgba(77, 163, 255, 0.3);
-  }
-
-  .cert-item a {
-    color: #4da3ff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-
-  .cert-item a:hover {
-    color: #7b53ff;
-  }
-
-  .cert-platform {
-    color: #8892a6;
-    font-size: 0.9rem;
-    margin-top: 4px;
-  }
-
-  .cert-skills {
-    color: #aeb7c6;
-    font-size: 0.85rem;
-    margin-top: 8px;
-    font-style: italic;
-  }
-
-  /* Contact - unified styling */
-  .contact-grid { 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px; 
-    margin-top: 32px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .contact-btn {
-    background: rgba(18, 24, 38, 0.5);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(77, 163, 255, 0.3);
-    border-radius: 20px;
-    padding: 28px 32px;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-    font-weight: 600;
-    color: #e6e9f0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: radial-gradient(circle, rgba(77, 163, 255, 0.3), transparent);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-  }
-
-  .contact-btn:hover::before {
-    width: 400px;
-    height: 400px;
-  }
-  
-  .contact-btn:hover { 
-    transform: translateY(-8px);
-    background: rgba(77, 163, 255, 0.15);
-    border-color: #4da3ff;
-    box-shadow: 0 12px 32px rgba(77, 163, 255, 0.3);
-  }
-  
-  .contact-sub { 
-    font-size: 0.85rem; 
-    color: #4da3ff; 
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-  }
-
-  /* Floating particles effect */
-  .particle {
-    position: fixed;
-    width: 4px;
-    height: 4px;
-    background: rgba(77, 163, 255, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    animation: float 8s infinite;
-    z-index: 0;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-  }
-
-  @media(max-width: 768px){
-    #home h1 { font-size: 3rem; }
-    h2 { font-size: 2.2rem; }
-    .about-content { flex-direction: column; }
-    .section-nav { 
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      top: auto;
-      transform: none;
-      flex-direction: row;
-      justify-content: space-around;
-      background: rgba(10, 14, 20, 0.95);
-      backdrop-filter: blur(20px);
-      padding: 12px 8px;
-      border-top: 1px solid rgba(77, 163, 255, 0.3);
-      gap: 4px;
-    }
-    .section-nav button { 
-      padding: 8px 4px;
-      font-size: 0.7rem;
-      border-radius: 8px;
-      flex: 1;
-      min-width: 0;
-    }
-    .section-nav button:hover {
-      transform: translateX(0) translateY(-2px);
-    }
-    .cta-buttons { flex-direction: column; }
-    section { padding-right: 40px; padding-bottom: 100px; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr; }
-  }
-
-  @media(min-width: 769px) and (max-width: 1200px){
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vaishnavi Kulkarni — Supply Chain & Data Analytics professional with 3+ years driving operational efficiency through Power BI, SQL, Python, and Snowflake.">
+  <title>Vaishnavi Kulkarni | Supply Chain & Data Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<!-- Floating particles -->
-<div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-<div class="particle" style="left: 20%; animation-delay: 2s;"></div>
-<div class="particle" style="left: 30%; animation-delay: 4s;"></div>
-<div class="particle" style="left: 40%; animation-delay: 1s;"></div>
-<div class="particle" style="left: 50%; animation-delay: 3s;"></div>
-<div class="particle" style="left: 60%; animation-delay: 5s;"></div>
-<div class="particle" style="left: 70%; animation-delay: 2.5s;"></div>
-<div class="particle" style="left: 80%; animation-delay: 4.5s;"></div>
-<div class="particle" style="left: 90%; animation-delay: 1.5s;"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
-<!-- Floating Navigation -->
-<div class="section-nav">
-  <button onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'});">Home</button>
-  <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});">About</button>
-  <button onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'});">Experience</button>
-  <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'});">Projects</button>
-  <button onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'});">Skills</button>
-  <button onclick="document.getElementById('education').scrollIntoView({behavior:'smooth'});">Education</button>
-  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Contact</button>
-</div>
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo">VK<span>.</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#whyme">Why Me</a></li>
+      <li><a href="#timeline">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg id="iconMenu" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg id="iconClose" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+</nav>
 
-<!-- Sections -->
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <section id="home">
-  <div>
-    <h1>Vaishnavi Kulkarni</h1>
-    <p class="hero-subtitle">Supply Chain & Data Analytics Professional</p>
-    <p class="hero-description">
-      Supply Chain & Data Analytics professional with 3+ years of experience optimizing end-to-end operations and building data-driven solutions. 
-      Specialized in transforming complex operational challenges into actionable insights through advanced analytics, interactive dashboards, and automated reporting systems that drive efficiency and strategic decision-making.
-    </p>
-    <div class="cta-buttons">
-      <a href="#contact" class="btn-primary">Get In Touch</a>
-      <a href="Resume.pdf" download="Resume_Vaishnavi_Kulkarni.pdf" class="btn-secondary">📄 Download Resume</a>
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Open to new opportunities
+      </div>
+
+      <h1 class="hero-title">
+        Vaishnavi<br><span class="highlight">Kulkarni</span>
+      </h1>
+
+      <p class="hero-tagline">
+        Supply Chain &amp; <span class="rotating-word" id="rotatingWord">Data Analytics</span> Professional
+      </p>
+
+      <p class="hero-description">
+        3+ years driving operational efficiency through data-driven decisions —
+        building analytics solutions that connect supply chain complexity to measurable business outcomes.
+      </p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-value" data-target="3" data-suffix="+">0+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-value" data-target="25" data-suffix="%">0%</span>
+          <span class="stat-label">Avg. Efficiency Gain</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-value">M.S.</span>
+          <span class="stat-label">Industrial Engineering</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-value" data-target="13" data-suffix="">0</span>
+          <span class="stat-label">Certifications</span>
+        </div>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="Resume.pdf" download="Resume_Vaishnavi_Kulkarni.pdf" class="btn btn-outline">Download Resume ↓</a>
+      </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
 <section id="about">
-  <h2>About Me</h2>
-  <div class="about-content">
-    <div class="about-text">
-      <p>
-        I am a Supply Chain and Data Analytics professional with a proven track record of optimizing end-to-end operations across demand planning, inventory management, procurement, logistics, and order fulfillment. My experience spans from high-volume consumer products to complex industrial manufacturing environments.
-      </p>
-      <p>
-        I specialize in building end-to-end analytics solutions that transform raw operational data into strategic insights. Using tools like Power BI, SQL, Python, and Snowflake, I design automated dashboards, develop predictive models, and create KPI frameworks that enable stakeholders to make faster, more informed decisions. My work bridges the gap between complex data and actionable business intelligence.
-      </p>
-      <p>
-        With a Master's in Industrial Engineering from the University at Buffalo and hands-on experience across multiple supply chain domains, I'm focused on opportunities where I can leverage data analytics and operational expertise to drive measurable improvements in efficiency, accuracy, and strategic planning.
-      </p>
+  <div class="container">
+
+    <div class="section-title fade-in">
+      <span class="section-label">About</span>
+      <h2>Who I Am</h2>
     </div>
-    <div>
-      <div class="expertise-item"><h4>🔗 Supply Chain Operations</h4><p>End-to-end operations management including demand forecasting, inventory optimization, procurement coordination, logistics execution, S&OP facilitation, and order fulfillment across distribution networks.</p></div>
-      <div class="expertise-item"><h4>📊 Data Analytics & BI</h4><p>Building interactive dashboards, automated reporting pipelines, and predictive models using Power BI, SQL, Python, Snowflake, and advanced Excel. Expertise in KPI design, data modeling, and translating complex analytics into business insights.</p></div>
-      <div class="expertise-item"><h4>⚙️ Process Automation & Optimization</h4><p>Streamlining workflows through automation, standardizing operational procedures, conducting root-cause analysis, and implementing data-driven improvements that reduce costs and enhance performance.</p></div>
-      <div class="expertise-item"><h4>🤝 Cross-Functional Leadership</h4><p>Collaborating with Planning, Procurement, Logistics, Finance, IT, and Customer Service teams to align objectives, improve data accuracy, and deliver integrated solutions across the supply chain.</p></div>
+
+    <div class="about-grid">
+
+      <div class="about-left">
+        <div class="about-text fade-in">
+          <p>
+            I'm a Supply Chain and Data Analytics professional with a proven track record
+            of optimizing end-to-end operations across demand planning, inventory management,
+            procurement, logistics, and order fulfillment — spanning consumer products and
+            complex industrial manufacturing.
+          </p>
+          <p>
+            I specialize in turning raw operational data into strategic insight. Using Power BI,
+            SQL, Python, and Snowflake, I build automated dashboards, predictive models, and
+            KPI frameworks that enable faster, more informed decisions.
+          </p>
+          <p>
+            With a Master's in Industrial Engineering from the University at Buffalo, I bridge
+            complex data and actionable business intelligence — focused on roles where analytics
+            and operational expertise drive real, measurable improvement.
+          </p>
+        </div>
+
+        <div class="expertise-list fade-in fade-in-delay-1">
+          <div class="expertise-item">
+            <h4>Supply Chain Operations</h4>
+            <p>Demand forecasting · inventory optimization · S&amp;OP · procurement · logistics</p>
+          </div>
+          <div class="expertise-item">
+            <h4>Data Analytics &amp; BI</h4>
+            <p>Power BI · SQL pipelines · Python automation · KPI design</p>
+          </div>
+          <div class="expertise-item">
+            <h4>Process Optimization</h4>
+            <p>Root-cause analysis · workflow automation · cost reduction</p>
+          </div>
+          <div class="expertise-item">
+            <h4>Cross-Functional Leadership</h4>
+            <p>Planning · Procurement · Logistics · Finance · IT alignment</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-photo-wrap fade-in fade-in-delay-2">
+        <div class="photo-frame">
+          <img src="Photo.jpeg" alt="Vaishnavi Kulkarni">
+        </div>
+        <p class="photo-name">Vaishnavi Kulkarni</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section id="experience">
-  <h2>Professional Experience</h2>
 
-  <div class="card">
-    <h3>Supply Chain & Operations Analyst | Global Impex USA</h3>
-    <p>St Cloud, MN | May 2025 – Dec 2025</p>
-    <ul>
-      <li>Orchestrated end-to-end order execution for high-volume consumer products, ensuring seamless alignment across demand planning, inventory availability, and delivery schedules.</li>
-      <li>Monitored inventory health metrics including aging stock, turnover rates, and replenishment triggers across multiple distribution centers, reducing stockout incidents by 25% and minimizing excess inventory carrying costs.</li>
-      <li>Collaborated with carriers and 3PL partners to track shipment statuses, manage delivery exceptions, and provide proactive ETA updates, cutting customer inquiry response time by 30%.</li>
-      <li>Developed reconciliation frameworks across orders, shipments, and invoices to enhance data accuracy and reduce fulfillment discrepancies during multi-stage operations.</li>
-      <li>Supported raw material procurement by analyzing supplier lead times, capacity constraints, and open purchase order status to mitigate supply chain disruptions.</li>
-      <li>Standardized operational reporting by integrating disparate data sources from internal systems and vendor portals, improving KPI visibility and accessibility for leadership.</li>
-      <li>Conducted weekly forecast accuracy assessments and consumption trend analyses to refine short-term planning decisions and enhance demand-supply alignment.</li>
-    </ul>
-  </div>
+<!-- ============================================================
+     WHY ME
+     ============================================================ -->
+<section id="whyme">
+  <div class="container">
 
-  <div class="card">
-    <h3>Sr. Supply Chain Analyst | Siemens Pvt Ltd</h3>
-    <p>Mumbai, India | Jul 2023 – Jun 2024</p>
-    <ul>
-      <li>Designed and deployed interactive dashboards tracking procurement performance, inventory turnover, material utilization, and supplier reliability metrics, reducing manual tracking effort by 25%.</li>
-      <li>Automated procurement workflows and reporting pipelines using Python and Power Query, streamlining data processing and cutting operational costs by 12%.</li>
-      <li>Facilitated S&OP (Sales & Operations Planning) processes by analyzing material requirements, supplier commitments, and production schedules to ensure demand-supply balance.</li>
-      <li>Enhanced inventory accuracy through systematic root-cause analysis of discrepancies, aging stock patterns, and replenishment delays, improving overall data integrity.</li>
-      <li>Partnered with procurement and engineering teams to evaluate vendor performance and optimize sourcing strategies, contributing to cost savings and improved supplier relationships.</li>
-    </ul>
-  </div>
+    <div class="section-title fade-in">
+      <span class="section-label">Value Proposition</span>
+      <h2>Why Me?</h2>
+    </div>
 
-  <div class="card">
-    <h3>Project Manager | Neptune Engineering Pvt Ltd</h3>
-    <p>Pune, India | Aug 2022 – Nov 2022</p>
-    <ul>
-      <li>Designed precision system layouts using AutoCAD with comprehensive bill of materials (BOM) management, improving design accuracy and reducing costly change orders during manufacturing phases by 18%.</li>
-      <li>Standardized engineering documentation processes across cross-functional project teams, implementing structured templates and review workflows that accelerated approval cycle time by 20%.</li>
-      <li>Established structured feedback mechanisms between engineering, procurement, and manufacturing teams, enhancing project approval turnaround and overall execution efficiency.</li>
-    </ul>
-  </div>
+    <div class="whyme-grid">
 
-  <div class="card">
-    <h3>Project Engineer & Procurement Lead | BAJA SAE India – Team Gyrfalcons</h3>
-    <p>Pune, India | Jan 2021 – May 2021</p>
-    <ul>
-      <li>Engineered high-performance ATV steering system using CATIA V5, optimizing steering geometry for enhanced maneuverability on challenging terrain for national-level collegiate competition.</li>
-      <li>Managed full procurement lifecycle within ₹10K budget, executing procure-to-pay process including vendor identification, negotiation, purchase order management, and delivery coordination.</li>
-      <li>Secured ₹20K in corporate sponsorships from automotive industry partners through targeted technical proposals, expanding project resources by 200% and enabling advanced component selection for competitive advantage.</li>
-    </ul>
+      <div class="whyme-card fade-in">
+        <span class="whyme-icon">⚡</span>
+        <h3>Dual Expertise — Analytics &amp; Operations</h3>
+        <p>
+          Most analysts understand data. Most supply chain professionals understand operations.
+          I do both — bridging the gap between raw data and operational decisions that
+          actually move KPIs. I've shipped dashboards <em>and</em> managed logistics.
+        </p>
+      </div>
+
+      <div class="whyme-card fade-in fade-in-delay-1">
+        <span class="whyme-icon">📊</span>
+        <h3>Impact-First Mindset</h3>
+        <p>
+          Every dashboard I build answers a business question. At Siemens, automated pipelines
+          cut costs by 12%. At Global Impex, better inventory monitoring reduced stockouts by 25%.
+          I measure success in outcomes, not outputs.
+        </p>
+      </div>
+
+      <div class="whyme-card fade-in fade-in-delay-2">
+        <span class="whyme-icon">🔗</span>
+        <h3>End-to-End Ownership</h3>
+        <p>
+          I don't hand off at the data layer. From raw SQL to a polished Power BI dashboard
+          to a business recommendation in an S&amp;OP meeting — I own the full analytical
+          narrative and can communicate it to any audience.
+        </p>
+      </div>
+
+      <div class="whyme-card fade-in fade-in-delay-1">
+        <span class="whyme-icon">🛠️</span>
+        <h3>Modern, Cross-Platform Toolset</h3>
+        <p>
+          Power BI · DAX · SQL · Python · Snowflake · Databricks · SAP · R.
+          I adapt quickly to new stacks and have built production-grade solutions
+          on cloud platforms — not just academic exercises.
+        </p>
+      </div>
+
+      <div class="whyme-card fade-in fade-in-delay-2">
+        <span class="whyme-icon">🎓</span>
+        <h3>Academic Rigor Meets Real-World Delivery</h3>
+        <p>
+          M.S. Industrial Engineering (UB) + B.E. Mechanical Engineering gives me a strong
+          quantitative foundation — operations research, statistical modeling, and optimization —
+          applied directly to real supply chain challenges.
+        </p>
+      </div>
+
+      <div class="whyme-card fade-in fade-in-delay-3">
+        <span class="whyme-icon">🌐</span>
+        <h3>Global, Cross-Cultural Experience</h3>
+        <p>
+          Delivered results across the U.S. and India — collaborating with international
+          suppliers, 3PLs, and engineering teams. Comfortable navigating complex, multi-stakeholder
+          environments with competing priorities.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="whyme-highlight fade-in fade-in-delay-2">
+      <span class="whyme-highlight-icon">💡</span>
+      <p>
+        I bring a rare combination of <strong>supply chain domain depth</strong> and
+        <strong>data engineering capability</strong> — I can sit with a planner to understand
+        the problem, build the analytical solution, and present findings to leadership.
+        That full-stack analytical ownership is what sets me apart.
+      </p>
+    </div>
+
   </div>
 </section>
 
+
+<!-- ============================================================
+     HORIZONTAL TIMELINE — Journey
+     Left = oldest (2021) → Right = newest (2025)
+     Blue dot = Work  |  Purple dot = Education
+     Drag on desktop · Touch-scroll on mobile
+     ============================================================ -->
+<section id="timeline">
+  <div class="container">
+
+    <div class="section-title fade-in">
+      <span class="section-label">Career &amp; Education</span>
+      <h2>My Journey</h2>
+    </div>
+
+    <div class="tl-legend fade-in">
+      <div class="tl-legend-item">
+        <span class="tl-legend-dot tl-legend-dot--work"></span>
+        Work Experience
+      </div>
+      <div class="tl-legend-item">
+        <span class="tl-legend-dot tl-legend-dot--edu"></span>
+        Education
+      </div>
+    </div>
+
+  </div><!-- /container — timeline scrolls full-width -->
+
+  <div class="container">
+    <div class="htl-outer fade-in">
+
+      <div class="htl-scroll" id="htlScroll">
+        <div class="htl-spacer-start"></div>
+
+        <!-- ① BAJA SAE — Jan–May 2021 — oldest, leftmost -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--work"></div>
+            <span class="htl-period">Jan – May 2021</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--work">Work</span>
+            <div class="htl-org htl-org--work">BAJA SAE India</div>
+            <div class="htl-role">Project Engineer &amp; Procurement Lead</div>
+            <ul class="htl-bullets">
+              <li>Engineered ATV steering system in CATIA V5 for national competition.</li>
+              <li>Managed procure-to-pay within ₹10K budget — sourcing to delivery.</li>
+              <li>Secured ₹20K sponsorships, expanding resources by <strong>200%</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ② Neptune Engineering — Aug–Nov 2022 -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--work"></div>
+            <span class="htl-period">Aug – Nov 2022</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--work">Work</span>
+            <div class="htl-org htl-org--work">Neptune Engineering</div>
+            <div class="htl-role">Project Manager</div>
+            <ul class="htl-bullets">
+              <li>Designed AutoCAD layouts with BOM — cut change orders by <strong>18%</strong>.</li>
+              <li>Standardized documentation templates — approval time ↓ <strong>20%</strong>.</li>
+              <li>Built feedback loops across engineering, procurement, and manufacturing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ③ B.E. SPPU — Apr 2019–Jul 2023 -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--edu"></div>
+            <span class="htl-period">Apr 2019 – Jul 2023</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--edu">Education</span>
+            <div class="htl-org htl-org--edu">Savitribai Phule Pune University</div>
+            <div class="htl-role">B.E. Mechanical Engineering</div>
+            <p class="htl-desc">
+              Strong foundation in mechanical systems, product design, and industrial applications.
+              Developed analytical thinking through data, design, and organizational coursework.
+            </p>
+            <div class="htl-tags">
+              <span class="htl-tag">Product Design</span>
+              <span class="htl-tag">Data Analytics Lab</span>
+              <span class="htl-tag">Industrial Psychology</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ Siemens — Jul 2023–Jun 2024 -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--work"></div>
+            <span class="htl-period">Jul 2023 – Jun 2024</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--work">Work</span>
+            <div class="htl-org htl-org--work">Siemens Pvt Ltd</div>
+            <div class="htl-role">Sr. Supply Chain Analyst</div>
+            <ul class="htl-bullets">
+              <li>Built dashboards for procurement &amp; inventory — tracking effort ↓ <strong>25%</strong>.</li>
+              <li>Automated workflows in Python &amp; Power Query — costs ↓ <strong>12%</strong>.</li>
+              <li>Facilitated S&amp;OP to balance demand, supplier commitments &amp; schedules.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ⑤ M.S. UB — Aug 2023–Dec 2025 -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--edu"></div>
+            <span class="htl-period">Aug 2023 – Dec 2025</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--edu">Education</span>
+            <div class="htl-org htl-org--edu">University at Buffalo, SUNY</div>
+            <div class="htl-role">M.S. Industrial Engineering</div>
+            <p class="htl-desc">
+              Specialized in operations research, supply chain optimization, and data analytics.
+              Applied quantitative methods to real manufacturing and logistics challenges.
+            </p>
+            <div class="htl-tags">
+              <span class="htl-tag">Operations Research</span>
+              <span class="htl-tag">Supply Chain Opt.</span>
+              <span class="htl-tag">Statistical Modeling</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⑥ Global Impex — May–Dec 2025 — newest, rightmost -->
+        <div class="htl-entry">
+          <div class="htl-node">
+            <div class="htl-dot htl-dot--work"></div>
+            <span class="htl-period">May – Dec 2025</span>
+          </div>
+          <div class="htl-stem"></div>
+          <div class="htl-card">
+            <span class="htl-badge htl-badge--work">Work</span>
+            <div class="htl-org htl-org--work">Global Impex USA</div>
+            <div class="htl-role">Supply Chain &amp; Operations Analyst</div>
+            <ul class="htl-bullets">
+              <li>Reduced stockouts by <strong>25%</strong> via inventory health monitoring across DCs.</li>
+              <li>Cut customer inquiry response time by <strong>30%</strong> with 3PL exception management.</li>
+              <li>Standardized KPI reporting by integrating disparate operational data sources.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="htl-spacer-end"></div>
+      </div><!-- /htl-scroll -->
+
+      <div class="htl-hint">
+        <span>← drag or swipe to explore →</span>
+      </div>
+
+    </div><!-- /htl-outer -->
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
 <section id="projects">
-  <h2>Featured Projects</h2>
-  <div class="projects-grid">
-    <div class="card">
-      <h3>End-to-End Supply Chain Analytics Solution</h3>
-      <p>Power BI | DAX | Data Modeling | Supply Chain KPIs | Forecasting & Inventory Analytics</p>
-      <p>
-        Designed and built a comprehensive supply chain analytics solution in Power BI, focusing on understanding how forecasting decisions impact execution stability and inventory outcomes across the network.
-      </p>
-      <p>
-        Defined and calculated key supply chain KPIs including forecast accuracy, forecast bias, order volatility, and inventory efficiency metrics. Modeled data to analyze performance across time, categories, regions, and stores, revealing critical patterns in demand planning behavior.
-      </p>
-      <p>
-        Developed interactive dashboards that identified persistent over-forecasting bias contributing to sustained overstock, while maintaining strong availability and low volatility indicators, highlighting inventory optimization opportunities without compromising service levels.
-      </p>
-      <p class="impact"><strong>Impact:</strong> Translated analytical findings into clear, business-focused insights demonstrating that forecast accuracy was consistently high across the network, enabling stakeholders to make informed decisions about inventory optimization strategies.</p>
+  <div class="container">
+
+    <div class="section-title fade-in">
+      <span class="section-label">Projects</span>
+      <h2>Featured Work</h2>
     </div>
 
-    <div class="card">
-      <h3>Energy Insecurity Prediction & Mapping</h3>
-      <p>R | GIS | Machine Learning | Spatial Analysis | Data Visualization</p>
-      <p>
-        Developed a comprehensive predictive analytics framework to identify and map energy insecurity hotspots across U.S. regions by integrating demographic, economic, climate, and energy consumption datasets from multiple federal data sources.
-      </p>
-      <p>
-        Applied advanced clustering algorithms (K-means, hierarchical clustering) and regression models to uncover spatial and temporal patterns in energy poverty, with particular emphasis on high-burden households disproportionately affected by energy costs.
-      </p>
-      <p>
-        Created interactive geospatial dashboards synthesizing socioeconomic indicators with energy consumption data, providing policymakers with actionable intelligence to identify priority intervention regions and design targeted assistance programs.
-      </p>
-      <p class="impact"><strong>Impact:</strong> Enabled data-driven identification of vulnerable populations and geographic areas requiring immediate energy assistance, improving resource allocation efficiency for state and federal energy assistance programs.</p>
-    </div>
+    <div class="projects-list">
 
-    <div class="card">
-      <h3>CitiBike Demand Forecasting & Optimization</h3>
-      <p>Python | Pandas | XGBoost | Seaborn | Time Series Analysis | Feature Engineering</p>
-      <p>
-        Built machine learning models to forecast hourly demand across 800+ CitiBike stations, supporting efficient bike rebalancing operations and improving overall service reliability for New York City's bike-share system.
-      </p>
-      <p>
-        Engineered 50+ time-based and usage-pattern features from 2M+ historical trip records, applying XGBoost gradient boosting to capture complex demand patterns influenced by weather conditions, temporal factors, and seasonal trends.
-      </p>
-      <p>
-        Developed interactive visualization dashboards revealing demand trends by hour, day, and month, enabling operations teams to identify peak usage periods and optimize fleet allocation strategies in real-time, reducing bike shortages during high-demand periods.
-      </p>
-      <p class="impact"><strong>Impact:</strong> Delivered actionable insights that improved fleet management efficiency by 22%, reduced bike shortages at high-demand stations by 30%, and enhanced user experience through better bike availability.</p>
+      <div class="card fade-in">
+        <h3 class="project-title">End-to-End Supply Chain Analytics Solution</h3>
+        <div class="project-tools">
+          <span class="tool-tag">Power BI</span>
+          <span class="tool-tag">DAX</span>
+          <span class="tool-tag">Data Modeling</span>
+          <span class="tool-tag">Supply Chain KPIs</span>
+          <span class="tool-tag">Forecasting Analytics</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <p class="project-section-label">Problem</p>
+            <p>Stakeholders lacked visibility into how forecasting decisions drove execution instability and inventory buildup across the distribution network.</p>
+          </div>
+          <div>
+            <p class="project-section-label">Solution</p>
+            <p>Built a Power BI platform tracking forecast accuracy, forecast bias, order volatility, and inventory efficiency across time, categories, regions, and stores.</p>
+          </div>
+        </div>
+        <div class="project-impact">
+          <p class="project-section-label">Impact</p>
+          <p>Identified persistent over-forecasting bias driving sustained overstock — enabling informed inventory optimization decisions without compromising service levels.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in fade-in-delay-1">
+        <h3 class="project-title">Energy Insecurity Prediction &amp; Geospatial Mapping</h3>
+        <div class="project-tools">
+          <span class="tool-tag">R</span>
+          <span class="tool-tag">GIS</span>
+          <span class="tool-tag">K-Means Clustering</span>
+          <span class="tool-tag">Regression Modeling</span>
+          <span class="tool-tag">Spatial Analysis</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <p class="project-section-label">Problem</p>
+            <p>Policymakers lacked data-driven tools to identify energy-insecure households and geographic hotspots for targeted assistance allocation.</p>
+          </div>
+          <div>
+            <p class="project-section-label">Solution</p>
+            <p>Built a predictive framework integrating demographic, economic, climate, and energy datasets — applied K-means clustering and regression to surface spatial patterns in energy poverty.</p>
+          </div>
+        </div>
+        <div class="project-impact">
+          <p class="project-section-label">Impact</p>
+          <p>Delivered interactive geospatial dashboards enabling priority-region identification, improving resource allocation efficiency for state and federal energy assistance programs.</p>
+        </div>
+      </div>
+
+      <div class="card fade-in fade-in-delay-2">
+        <h3 class="project-title">CitiBike Demand Forecasting &amp; Fleet Optimization</h3>
+        <div class="project-tools">
+          <span class="tool-tag">Python</span>
+          <span class="tool-tag">XGBoost</span>
+          <span class="tool-tag">Pandas</span>
+          <span class="tool-tag">Time Series Analysis</span>
+          <span class="tool-tag">Feature Engineering</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <p class="project-section-label">Problem</p>
+            <p>800+ CitiBike stations suffered from inefficient rebalancing due to unpredictable demand across boroughs, time periods, and weather conditions.</p>
+          </div>
+          <div>
+            <p class="project-section-label">Solution</p>
+            <p>Forecasted hourly demand using 50+ engineered features from 2M+ trip records. XGBoost models + interactive dashboards enabled real-time rebalancing decisions.</p>
+          </div>
+        </div>
+        <div class="project-impact">
+          <p class="project-section-label">Impact</p>
+          <p>Fleet management efficiency improved by <strong>22%</strong>. Bike shortages at high-demand stations reduced by <strong>30%</strong>.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
 <section id="skills">
-  <h2>Technical Skills</h2>
-  <div class="skills-grid">
-    <div class="skill-category">
-      <h3>Business Intelligence & Visualization</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Power BI</span>
-        <span class="skill-tag">DAX</span>
-        <span class="skill-tag">Tableau</span>
-        <span class="skill-tag">Data Modeling</span>
-        <span class="skill-tag">Dashboard Design</span>
-        <span class="skill-tag">KPI Development</span>
-      </div>
+  <div class="container">
+
+    <div class="section-title fade-in">
+      <span class="section-label">Skills</span>
+      <h2>Technical Expertise</h2>
     </div>
 
-    <div class="skill-category">
-      <h3>Data Engineering & Analytics</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">SQL</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">R</span>
-        <span class="skill-tag">Snowflake</span>
-        <span class="skill-tag">BigQuery</span>
-        <span class="skill-tag">Power Query</span>
-        <span class="skill-tag">Pandas</span>
-      </div>
-    </div>
+    <div class="skills-grid">
 
-    <div class="skill-category">
-      <h3>Machine Learning & Advanced Analytics</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Predictive Modeling</span>
-        <span class="skill-tag">XGBoost</span>
-        <span class="skill-tag">Time Series Forecasting</span>
-        <span class="skill-tag">Clustering Analysis</span>
-        <span class="skill-tag">Regression Analysis</span>
-        <span class="skill-tag">Feature Engineering</span>
+      <div class="skill-category fade-in">
+        <h3>Business Intelligence &amp; Visualization</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">DAX</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Data Modeling</span>
+          <span class="skill-tag">Dashboard Design</span>
+          <span class="skill-tag">KPI Development</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-category">
-      <h3>Supply Chain & ERP Systems</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">SAP</span>
-        <span class="skill-tag">MRP Planning</span>
-        <span class="skill-tag">Demand Forecasting</span>
-        <span class="skill-tag">Inventory Optimization</span>
-        <span class="skill-tag">S&OP</span>
-        <span class="skill-tag">Logistics Management</span>
+      <div class="skill-category fade-in fade-in-delay-1">
+        <h3>Data Engineering &amp; Analytics</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">Snowflake</span>
+          <span class="skill-tag">BigQuery</span>
+          <span class="skill-tag">Power Query</span>
+          <span class="skill-tag">Pandas</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-category">
-      <h3>Cloud & Data Platforms</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">AWS</span>
-        <span class="skill-tag">Azure</span>
-        <span class="skill-tag">Snowflake Warehouses</span>
-        <span class="skill-tag">Data Warehousing</span>
+      <div class="skill-category fade-in fade-in-delay-2">
+        <h3>Machine Learning &amp; Advanced Analytics</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Predictive Modeling</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">Time Series</span>
+          <span class="skill-tag">Clustering Analysis</span>
+          <span class="skill-tag">Regression Analysis</span>
+          <span class="skill-tag">Feature Engineering</span>
+        </div>
       </div>
-    </div>
 
-    <div class="skill-category">
-      <h3>Productivity & Design Tools</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Advanced Excel</span>
-        <span class="skill-tag">VBA</span>
-        <span class="skill-tag">CATIA V5</span>
-        <span class="skill-tag">AutoCAD</span>
-        <span class="skill-tag">SolidWorks</span>
-        <span class="skill-tag">Matplotlib/Seaborn</span>
+      <div class="skill-category fade-in fade-in-delay-1">
+        <h3>Supply Chain &amp; ERP Systems</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">SAP</span>
+          <span class="skill-tag">MRP Planning</span>
+          <span class="skill-tag">Demand Forecasting</span>
+          <span class="skill-tag">Inventory Optimization</span>
+          <span class="skill-tag">S&amp;OP</span>
+          <span class="skill-tag">Logistics Management</span>
+        </div>
       </div>
+
+      <div class="skill-category fade-in fade-in-delay-2">
+        <h3>Cloud &amp; Data Platforms</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">Snowflake</span>
+          <span class="skill-tag">Databricks</span>
+          <span class="skill-tag">Data Warehousing</span>
+        </div>
+      </div>
+
+      <div class="skill-category fade-in fade-in-delay-3">
+        <h3>Productivity &amp; Engineering Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Advanced Excel</span>
+          <span class="skill-tag">VBA</span>
+          <span class="skill-tag">CATIA V5</span>
+          <span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">Matplotlib / Seaborn</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section id="education">
-  <h2>Education & Certifications</h2>
-  <div class="education-grid">
-    <div class="education-card">
-      <h3>🎓 Master of Science in Industrial Engineering</h3>
-      <p class="education-meta">University at Buffalo, The State University of New York | Graduated: December 2025</p>
-      <p style="color: #cfd6e4; line-height: 1.8; margin-top: 12px;">
-        Specialized in operations research, supply chain optimization, data analytics, and process improvement methodologies. 
-        Developed expertise in applying quantitative methods and statistical analysis to solve complex operational challenges.
-      </p>
+
+<!-- ============================================================
+     CREDENTIALS — 13 certifications, most recent first
+     ============================================================ -->
+<section id="credentials">
+  <div class="container">
+
+    <div class="section-title fade-in">
+      <span class="section-label">Credentials</span>
+      <h2>Certifications</h2>
     </div>
 
-    <div class="education-card">
-      <h3>📜 Professional Certifications</h3>
-      <div class="cert-list">
-        <div class="cert-item">
-          <strong>Hands-On Essentials: Data Warehousing Workshop</strong>
-          <p class="cert-platform">Snowflake • Issued February 2026</p>
-          <p class="cert-skills">Skills: Snowflake Databases • Snowflake Warehouses • Snowflake SQL Worksheets • Snowflake External Stages • SQL</p>
-        </div>
-        <div class="cert-item">
-          <strong>SQL Essential Training</strong>
-          <p class="cert-platform">LinkedIn Learning • Issued January 2026</p>
-          <p class="cert-skills">Skills: SQL</p>
-        </div>
-        <div class="cert-item">
-          <a href="https://www.linkedin.com/learning/certificates/15e7c519e53a2e81bbb846d38c3b5bbdeea44580889cff9295ddb30b13886a23" target="_blank">Material Requirements Planning (MRP) Strategies in SAP</a>
-          <p class="cert-platform">LinkedIn Learning • Issued February 2024</p>
-        </div>
-        <div class="cert-item">
-          <a href="https://www.coursera.org/account/accomplishments/verify/H5ZMC9FDWNXW" target="_blank">Supply Chain Logistics</a>
-          <p class="cert-platform">Coursera • Issued July 2023</p>
+    <!-- Filter buttons -->
+    <div class="cred-filter fade-in" id="credFilter">
+      <button class="cred-filter-btn active" data-filter="all">All (13)</button>
+      <button class="cred-filter-btn" data-filter="linkedin">LinkedIn Learning</button>
+      <button class="cred-filter-btn" data-filter="snowflake">Snowflake</button>
+      <button class="cred-filter-btn" data-filter="datacamp">DataCamp</button>
+      <button class="cred-filter-btn" data-filter="databricks">Databricks</button>
+      <button class="cred-filter-btn" data-filter="cscmp">CSCMP</button>
+      <button class="cred-filter-btn" data-filter="coursera">Coursera</button>
+      <button class="cred-filter-btn" data-filter="hackerrank">HackerRank</button>
+    </div>
+
+    <div class="credentials-grid" id="credGrid">
+
+      <!-- Mar 2026 -->
+      <div class="cred-card fade-in" data-issuer="databricks">
+        <a class="cred-name-link"
+           href="https://www.databricks.com/"
+           target="_blank" rel="noopener noreferrer">
+          SQL Analytics and BI on Databricks ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--orange">Databricks</span>
+          <span class="cred-date">Mar 2026</span>
         </div>
       </div>
+
+      <div class="cred-card fade-in fade-in-delay-1" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/c9f66f3c7c5f281dfd4cb183bdfe45d611b593ce20f5963eb7554fad37855fd7?trk=share_certificate%20#purchasing"
+           target="_blank" rel="noopener noreferrer">
+          Purchasing Foundations ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in fade-in-delay-2" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/340c7335bb89491cd5d8d05ac2fff001228 4787a3e893969aa27fe1ea0701f79?trk=share_certificate"
+           target="_blank" rel="noopener noreferrer">
+          Strategic Negotiation ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/1cb0c099ba075ac8fc0700d4abc3ec2d2ca4538a2a8ad7d0699b707b043eac20?trk=share_certificate%20#supplierdevelopment%20#sustainablesupplychainmanagement%20#supplierdiversity"
+           target="_blank" rel="noopener noreferrer">
+          Supply Chain Foundations: Supplier Development and Diversity ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in fade-in-delay-1" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/167e28519b42056ab47bab5538e0f724a75b1056bf424dcc7fab1a4f1d80e1867?trk=share_certificate%20#sustainablebusiness%20#supplychainoperations"
+           target="_blank" rel="noopener noreferrer">
+          Fundamentals of Sustainable Supply Chains ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in fade-in-delay-2" data-issuer="cscmp">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/11350e6d3158ff28fed9e5840c464e6f49e46a01499c6cefd8dc1f46d6"
+           target="_blank" rel="noopener noreferrer">
+          CSCMP Supply Chain Foundations: Procurement Professional Certificate ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--red">CSCMP</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/da7ffcfd553cedf28c0c8ac3b549b8b49976955dd5cb50639480609edfccba70"
+           target="_blank" rel="noopener noreferrer">
+          Supply Chain Foundations: Risk and Resilience ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Mar 2026</span>
+        </div>
+      </div>
+
+      <!-- Feb 2026 -->
+      <div class="cred-card fade-in fade-in-delay-1" data-issuer="snowflake">
+        <a class="cred-name-link"
+           href="https://achieve.snowflake.com/a255a17f-a0ae-4fd3-a38d-3aa82ce89520#acc.1V4EMXTo"
+           target="_blank" rel="noopener noreferrer">
+          Hands-On Essentials: Data Warehousing Workshop ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--green">Snowflake</span>
+          <span class="cred-date">Feb 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in fade-in-delay-2" data-issuer="hackerrank">
+        <a class="cred-name-link"
+           href="https://www.hackerrank.com/certificates/5395e5895d2f"
+           target="_blank" rel="noopener noreferrer">
+          SQL (Basic) Certificate ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--green">HackerRank</span>
+          <span class="cred-date">Feb 2026</span>
+        </div>
+      </div>
+
+      <div class="cred-card fade-in" data-issuer="datacamp">
+        <a class="cred-name-link"
+           href="https://www.datacamp.com/completed/statement-of-accomplishment/track/6cdd8400d6598e0111852bb0e15cb63e7c469e8c"
+           target="_blank" rel="noopener noreferrer">
+          Associate Data Analyst in SQL ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--purple">DataCamp</span>
+          <span class="cred-date">Feb 2026</span>
+        </div>
+        <p class="cred-license">License: DAA0016140457481</p>
+      </div>
+
+      <!-- Jan 2026 -->
+      <div class="cred-card fade-in fade-in-delay-1" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/bcc9c18112b853ab7f1208f721ed786516d0946ee17275585c30e7ae35e184c?trk=share_certificate"
+           target="_blank" rel="noopener noreferrer">
+          SQL Essential Training ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Jan 2026</span>
+        </div>
+      </div>
+
+      <!-- Feb 2024 -->
+      <div class="cred-card fade-in fade-in-delay-2" data-issuer="linkedin">
+        <a class="cred-name-link"
+           href="https://www.linkedin.com/learning/certificates/15e7c519e53a2e81bbb846d38c3b5bbdeea44580889cff9295ddb30b13886a23"
+           target="_blank" rel="noopener noreferrer">
+          Material Requirements Planning (MRP) Strategies in SAP ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer">LinkedIn Learning</span>
+          <span class="cred-date">Feb 2024</span>
+        </div>
+      </div>
+
+      <!-- Jul 2023 -->
+      <div class="cred-card fade-in" data-issuer="coursera">
+        <a class="cred-name-link"
+           href="https://coursera.org/share/b65083e797e66d7e571220cfd0bc4477"
+           target="_blank" rel="noopener noreferrer">
+          Supply Chain Logistics ↗
+        </a>
+        <div class="cred-meta">
+          <span class="cred-issuer cred-issuer--purple">Coursera</span>
+          <span class="cred-date">Jul 2023</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
 <section id="contact">
-  <h2>Get in Touch</h2>
-  <div class="contact-grid">
-    <div class="contact-btn" onclick="window.location.href='mailto:vaishnavikulkarni116@gmail.com';">
-      <div class="contact-sub">Email</div>
-      vaishnavikulkarni116@gmail.com
+  <div class="container">
+
+    <div class="section-title section-title-center fade-in">
+      <span class="section-label">Contact</span>
+      <h2>Get in Touch</h2>
     </div>
-    <div class="contact-btn">
-      <div class="contact-sub">Phone</div>
-      +1 (716) 936-6154
+
+    <p class="contact-intro fade-in fade-in-delay-1">
+      Open to full-time opportunities in Supply Chain Analytics and Operations.
+      I'd love to connect.
+    </p>
+
+    <div class="contact-grid fade-in fade-in-delay-2">
+      <a href="mailto:vaishnavikulkarni116@gmail.com" class="contact-card">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">vaishnavikulkarni116@gmail.com</div>
+        </div>
+      </a>
+      <a href="tel:+17169366154" class="contact-card">
+        <div class="contact-icon">☏</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+1 (716) 936-6154</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/kulkarnivaishnavi116" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <div class="contact-icon">in</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">kulkarnivaishnavi116</div>
+        </div>
+      </a>
+      <a href="https://github.com/Kul-Vaishnavi" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <div class="contact-icon">&lt;/&gt;</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">Kul-Vaishnavi</div>
+        </div>
+      </a>
     </div>
-    <div class="contact-btn" onclick="window.open('https://www.linkedin.com/in/kulkarnivaishnavi116','_blank');">
-      <div class="contact-sub">LinkedIn</div>
-      kulkarnivaishnavi116
-    </div>
-    <div class="contact-btn" onclick="window.open('https://github.com/Kul-Vaishnavi','_blank');">
-      <div class="contact-sub">GitHub</div>
-      Kul-Vaishnavi
-    </div>
+
   </div>
 </section>
+
+<footer>
+  <p>Designed &amp; built by Vaishnavi Kulkarni &middot; 2025</p>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Scroll progress + nav state ── */
+  const progressBar = document.getElementById('scrollProgress');
+  const nav         = document.getElementById('mainNav');
+
+  window.addEventListener('scroll', () => {
+    const st = document.documentElement.scrollTop;
+    const sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    progressBar.style.width = (st / sh * 100) + '%';
+    nav.classList.toggle('scrolled', st > 50);
+  }, { passive: true });
+
+  /* ── Active nav via IntersectionObserver ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-links a');
+
+  const secObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = '#' + e.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      }
+    });
+  }, { threshold: 0.28, rootMargin: '-8% 0px -18% 0px' });
+
+  sections.forEach(s => secObs.observe(s));
+
+  /* ── Fade-in on scroll ── */
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+  /* ── Animated counters ── */
+  function animateCounter(el) {
+    const target   = parseInt(el.dataset.target, 10);
+    const suffix   = el.dataset.suffix || '';
+    const duration = 1500;
+    const t0 = performance.now();
+    (function step(now) {
+      const p = Math.min((now - t0) / duration, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
+  let countersRan = false;
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !countersRan) {
+      countersRan = true;
+      document.querySelectorAll('.stat-value[data-target]').forEach(animateCounter);
+    }
+  }, { threshold: 0.5 }).observe(document.getElementById('home'));
+
+  /* ── Rotating tagline word ── */
+  const words  = ['Data Analytics', 'Operations', 'Business Intelligence', 'Process Optimization'];
+  let wIdx = 0;
+  const wEl = document.getElementById('rotatingWord');
+  if (wEl) {
+    setInterval(() => {
+      wEl.style.opacity = '0'; wEl.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        wIdx = (wIdx + 1) % words.length;
+        wEl.textContent = words[wIdx];
+        wEl.style.opacity = '1'; wEl.style.transform = 'translateY(0)';
+      }, 260);
+    }, 3200);
+  }
+
+  /* ── Horizontal timeline — drag to scroll ── */
+  const htl = document.getElementById('htlScroll');
+  if (htl) {
+    let isDown = false, startX = 0, scrollLeft = 0;
+
+    htl.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - htl.offsetLeft;
+      scrollLeft = htl.scrollLeft;
+      htl.style.scrollSnapType = 'none'; /* disable snap while dragging */
+    });
+
+    htl.addEventListener('mouseleave', () => { isDown = false; });
+    htl.addEventListener('mouseup',    () => {
+      isDown = false;
+      htl.style.scrollSnapType = '';
+    });
+
+    htl.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x    = e.pageX - htl.offsetLeft;
+      const walk = (x - startX) * 1.6;
+      htl.scrollLeft = scrollLeft - walk;
+    });
+
+    /* Hide hint once user has scrolled */
+    htl.addEventListener('scroll', () => {
+      const hint = htl.closest('.htl-outer')?.querySelector('.htl-hint');
+      if (hint && htl.scrollLeft > 30) hint.style.opacity = '0';
+    }, { passive: true });
+  }
+
+  /* ── Mobile nav toggle ── */
+  const navToggle  = document.getElementById('navToggle');
+  const navLinksEl = document.getElementById('navLinks');
+  const iconMenu   = document.getElementById('iconMenu');
+  const iconClose  = document.getElementById('iconClose');
+
+  navToggle.addEventListener('click', () => {
+    const open = navLinksEl.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+    iconMenu.style.display  = open ? 'none'  : 'block';
+    iconClose.style.display = open ? 'block' : 'none';
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  navLinks.forEach(l => l.addEventListener('click', () => {
+    navLinksEl.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    iconMenu.style.display  = 'block';
+    iconClose.style.display = 'none';
+    document.body.style.overflow = '';
+  }));
+
+  /* ── Credentials filter ── */
+  const filterBtns = document.querySelectorAll('.cred-filter-btn');
+  const credCards  = document.querySelectorAll('#credGrid .cred-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      credCards.forEach(card => {
+        const show = f === 'all' || card.dataset.issuer === f;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+}());
+</script>
 
 </body>
 </html>
